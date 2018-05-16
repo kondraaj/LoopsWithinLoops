@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Aaron Kondrat.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -79,8 +79,30 @@ def draw_L(window, circle, r, c):
       :type c: int
     and m and n are small, positive integers.
     """
+    dx = 2*circle.radius
+    dy = 2*circle.radius
+    x0 = circle.center.x
+    for k in range(r):
+        for j in range(3):
+            new_circle = rg.Circle(circle.center, circle.radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+            circle.center.x = circle.center.x + dx
+        circle.center.y = circle.center.y + dy
+        circle.center.x = x0
+    for i in range(3):
+        for h in range(c + 3):
+            new_circle = rg.Circle(circle.center, circle.radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+            circle.center.x = circle.center.x + dx
+        circle.center.y = circle.center.y + dy
+        circle.center.x = x0
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
@@ -120,8 +142,18 @@ def draw_wall_on_right(rectangle, n, window):
       :type window: rg.RoseWindow
     and n is a small, positive integer.
     """
+    dw = rectangle.get_width()
+    dh = rectangle.get_height()
+    for k in range(n):
+        for j in range(k + 1):
+            new_rectangle = rg.Rectangle(rectangle.corner_1, rectangle.corner_2)
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+            rectangle.move_by(-dw, 0)
+        rectangle.move_by((k+1)*dw, dh)
+
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
